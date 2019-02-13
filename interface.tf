@@ -5,7 +5,7 @@ variable "region" {
 
 variable "prefix" {
   description = "The Name of our org. i.e. examplecom."
-  default     = "xiangxutest"
+  default     = "examplecom"
 }
 
 variable "environment" {
