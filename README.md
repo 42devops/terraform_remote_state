@@ -14,6 +14,35 @@ module "remote_state" {
 
 See `interface.tf` for additional configurable variables.
 
+add `backend.hcl`
+
+```
+bucket         = "terraform-state"
+region         = "us-east-2"
+dynamodb_table = "terraform-locks"
+encrypt        = true
+```
+
+add the terraform backend
+
+```
+terraform {
+  backend "s3" {
+    bucket         = "${var.bucket}"
+    region         = "${var.region}"
+    dynamodb_table = "${var.dynamodb_table}"
+    key            = "example/terraform.tfstate"
+    encrypt        = true
+  }
+}
+```
+
+run `terraform init` with `-backend-config`
+
+```
+$ terraform init -backend-config=backend.hcl
+```
+
 ## License
 
 MIT
